@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>migrateMy.DB</title>
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+
+<body>
+    <div class="main-service">
+        <div class="navbar">
+            <div class="n-left">
+                <div>
+                    <img src="/images/logo.png" alt="">
+                    <h3>migrateMy.DB</h3>
+                </div>
+            </div>
+            <div class="n-right">
+                <a href="/">Home</a>
+                <a href="/services">Services</a>
+                <a href="/documentation">Documentation</a>
+                <% if (username) { %>
+                    <p style="color: rgb(65, 180, 225);">Welcome <%= username %></p>
+                    <a href="/logout" id="logout">Logout</a>
+                <% } else { %>
+                    <a href="/signin" id="signin">Sign-in</a>
+                    <a href="/signup" id="signup">Sign-up</a>
+                <% } %>
+            </div>
+        </div>
+        <div class="service-main">
+            <div class="left">
+                
+                <form action="/migrate" id="mysqlForm" method="post">
+                    <h6>MySQL Connection</h6>
+                    <input type="text" value="localhost" placeholder="MySQL-Hostname" name="mysqlhost">
+                    <input type="text" value="3306" placeholder="Port" name="port">
+                    <input type="text" value="root" placeholder="MySQL-Username" name="mysqlusername">
+                    <input type="text" placeholder="MySQL Password" name="mysqlpassword" required>
+                    <input type="text" placeholder="Database Name" name="mysqldb" required>
+                    <input type="text" placeholder="Table Name" name="tablename" required>
+                    
+                    <h6>MongoDB Connection</h6>
+                    <input type="text" value="mongodb://localhost:27017" placeholder="MongoDB URL" name="mongourl">
+                    <input type="text" name="mongodbname" placeholder="Database Name" required>
+                    <input type="text" name="collectionname" placeholder="Collection Name" required>
+                    <button id="saveButton" type="submit">Migrate Now</button>
+                </form>
+            </div>
+            <div class="middle">
+                <i class='bx bxs-chevrons-right'></i>
+                <i class='bx bxs-chevrons-right'></i>
+                <i class='bx bxs-chevrons-right'></i>
+                <i class='bx bxs-chevrons-right'></i>
+                <i class='bx bxs-chevrons-right'></i>
+
+            </div>
+            <div class="right">
+                <h6>Last Transactions</h6>
+                <div class="transactions-container">
+                    <% if (allMigrations && allMigrations.length > 0) { %>
+                        <% allMigrations.forEach(function(transaction) { %>
+                            <div class="transaction-item">
+                                <p><strong>Date:</strong> <%= transaction.timestamp.toLocaleString() %></p>
+                                <p><strong>Username:</strong> <%= transaction.username %></p>
+                                <p><strong>Records Transferred:</strong> <%= transaction.migratedCount %></p>
+                                <p><strong>Status:</strong> 
+                                    <span class="status <%= transaction.status.toLowerCase() %>">
+                                        <%= transaction.status %>
+                                    </span>
+                                </p>
+                            </div>
+                        <% }) %>
+                    <% } else { %>
+                        <p>No transactions found.</p>
+                    <% } %>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+
+    <script src="/javascripts/script.js"></script>
+</body>
+
+</html>

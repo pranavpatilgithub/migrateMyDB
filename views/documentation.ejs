@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>migrateMy.DB</title>
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+
+<body>
+    <div class="main-service">
+        <div class="navbar">
+            <div class="n-left">
+                <div>
+                    <img src="/images/logo.png" alt="">
+                    <h3>migrateMy.DB</h3>
+                </div>
+            </div>
+            <div class="n-right">
+                <a href="/">Home</a>
+                <a href="/services">Services</a>
+                <a href="/documentation">Documentation</a>
+                <% if (username) { %>
+                    <p style="color: rgb(65, 180, 225);">Welcome <%= username %></p>
+                    <a href="/logout" id="logout">Logout</a>
+                <% } else { %>
+                    <a href="/signin" id="signin">Sign-in</a>
+                    <a href="/signup" id="signup">Sign-up</a>
+                <% } %>
+            </div>
+        </div>
+        <div class="doc-main">
+            <div class="steps">
+                <div class="s-1">
+                    <h2>Step-1 : Enter Your MySQL Details</h2>
+                    <p>Before you proceed login into your account.</p>
+                    <p>Enter the MySQL details : hostname , username , password , database-name & table-name</p> 
+                </div>
+                <div class="s-2">
+                    <h2>Step-2 : Enter Your MongoDB Details</h2>
+                    <p>Enter the MongoDB details : localhost-url , database-name , collection-name</p>
+                </div>
+                <div class="s-3">
+                    <h2>Step-3 : Data Migration Using Batch Processing && Parallel Processing</h2>
+                    <p>Data is fetched from your mysql-workbench account using <span>SELECT * FROM table-name</span></p>
+                    <p>Then data-types of your mysql database are mapp to mongodb data-types.</p>
+                    <p>The records from the table are divided into batches according to <span>batch_size : 500</span></p>
+                    <p>For large number of records these batches are process in parallel. For these purpose we have used <span>p-limit</span> npm packages. In this way we have implemented batch processing and parallel processing for data migration.</p>
+                </div>
+                <div class="s-4">
+                    <h2>Step-4 : Migration Successfull</h2>
+                    <p><span>END</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/javascripts/script.js"></script>
+</body>
+
+</html>
